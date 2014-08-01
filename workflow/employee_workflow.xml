@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <!-- Work-flow -->
+        <record model="workflow" id="wkf_employee">
+            <field name="name">employee.wkf</field>
+            <field name="osv">company.employee</field>
+            <field name="on_create">True</field>
+        </record>
+
+        <!-- Work-flow Nodes/Activity -->
+        <record model="workflow.activity" id="act_new">
+            <field name="wkf_id" ref="wkf_employee" />
+            <field name="flow_start">True</field>
+            <field name="name">New</field>
+            <field name="kind">function</field>
+            <field name="action">employee_draft()</field>
+        </record>
+
+        <record model="workflow.activity" id="act_open">
+            <field name="wkf_id" ref="wkf_employee" />
+            <field name="name">Open</field>
+            <field name="kind">function</field>
+            <field name="action">employee_open()</field>
+        </record>
+
+        <record model="workflow.activity" id="act_close">
+            <field name="wkf_id" ref="wkf_employee" />
+            <field name="name">Close</field>
+            <field name="kind">function</field>
+            <field name="action">employee_close()</field>
+            <field name="flow_stop">True</field>
+        </record>
+
+        <record model="workflow.activity" id="act_cancel">
+            <field name="wkf_id" ref="wkf_employee" />
+            <field name="name">Cancel</field>
+            <field name="kind">function</field>
+            <field name="action">employee_cancel()</field>
+            <field name="flow_stop">True</field>
+        </record>
+
+        <!-- Work-flow Transitions -->
+        <record model="workflow.transition" id="t1">
+            <field name="act_from" ref="act_new" />
+            <field name="act_to" ref="act_open" />
+            <field name="signal">employee_bt_open</field>
+        </record>
+
+        <record model="workflow.transition" id="t2">
+            <field name="act_from" ref="act_open" />
+            <field name="act_to" ref="act_close" />
+            <field name="signal">employee_bt_close</field>
+        </record>
+
+        <record model="workflow.transition" id="t4">
+            <field name="act_from" ref="act_open" />
+            <field name="act_to" ref="act_cancel" />
+            <field name="signal">employee_bt_cancel</field>
+        </record>
+
+    </data>
+</openerp>

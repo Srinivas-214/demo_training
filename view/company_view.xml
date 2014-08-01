@@ -1,0 +1,101 @@
+<openerp>
+	<data>
+    	
+            <!-- Tree -->
+            <record model="ir.ui.view" id="company_employee_tree_view">
+                <field name="name">company.employee.tree</field>
+                <field name="model">company.employee</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                <tree string="Employee Details" colors="blue:state == 'new';black:state in ('open','close');gray:state == 'cancel'">
+                    <field name="name"/>
+                    <field name="join_date"/>
+                    <field name="state"/>
+                    <field name="enable"/>
+                    <button name="employee_turnoff" string="Mark In-Active" icon="gtk-index" type="object" attrs="{'invisible':[('enable','==',False)]}"/>
+                </tree>
+            </field>
+            </record>
+            
+            <!-- Search with Filter -->
+            <record model="ir.ui.view" id="company_employee_search_view">
+		        <field name="name">company.employee.search</field>
+		        <field name="model">company.employee</field>
+		        <field name="arch" type="xml">
+		            <search string="Company Employee">
+		                <field name="name" string="Employee"/>
+		                <filter icon="terp-check" string="New" name="current" domain="[('state','=','new')]" help="New Employee Entry" />
+		                <filter icon="terp-camera_test" string="Open" domain="[('state','=','open')]" help="Validate Employee" />
+		                <group expand="0" string="Group By...">
+                            <filter string="All Active Employees" icon="terp-personal" domain="[]" context="{'group_by':'enable'}"/>
+                        </group>
+		            </search>
+		        </field>
+    		</record>
+
+            <!-- Form -->
+            <record model="ir.ui.view" id="company_employee_form_view">
+                <field name="name">company.employee.form</field>
+                <field name="model">company.employee</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                <form string="Employee Details" version="7.0">
+                   <header>
+                    <button name="employee_bt_open" string="Open" states="new" class="oe_highlight"/>
+                    <button name="employee_bt_close" string="Accept" states="open" class="oe_highlight"/>
+                    <button name="employee_bt_cancel" string="Refuse" states="open"  class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,open,close"/>
+                   </header>
+                    <sheet>
+                    <group col="2">
+                        <field name="name"/>
+                        <field name="join_date"/>
+                    </group>
+                    <notebook>
+                         <page string="Other Information" groups="base.group_user">
+                            <group>
+                                <group name="employee_person" groups="base.group_user">
+                                    <field name="user_id"/>
+                                    <field name="enable"/>
+                                    <field name="origin" groups="base.group_no_one" />
+                                </group>
+                                <group name="employee_pay">
+                                    <field name="payment_term" widget="selection"/>
+                                    <field name="fiscal_position" widget="selection"/>
+                                </group>
+                            </group>
+                            <div class="oe_clear"/>
+                            <field name="note" class="oe_inline" placeholder="Terms and conditions..."/>
+                            <button name="employee_turnoff" string='Mark In-Active' class="oe_highlight" type="object" attrs="{'invisible':[('enable','==',False)]}"/>
+                        </page>
+                    </notebook>
+                  </sheet>
+                </form>
+            </field>
+            </record>
+
+            <!-- Action Window -->
+            <record model="ir.actions.act_window" id="action_company_employee_tree_view">
+                <field name="name">Employee</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">company.employee</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+                <!-- <field name="view_id" ref="company_employee_tree_view"/> -->
+                <field name="search_view_id" ref="company_employee_search_view"/>
+            </record>
+
+             <!-- parent = base.next_id_4 will place under Settings || Low Level Objects -->
+             <!-- parent = base.menu_config will place under Settings || Configuration -->
+             <!-- remove parent will place in top navigation bar -->
+		     <!-- Menu -->
+			 <menuitem id="menu_company_config" name="Company" sequence="25"/>
+			 <menuitem id="menu_company_employee_details"
+		        name="Employee Details" parent="menu_company_config"
+		        sequence="1"/>
+		     <menuitem id="menu_company_employee"
+		        action="action_company_employee_tree_view" parent="menu_company_employee_details"
+		        sequence="1"/>
+        
+	</data>
+</openerp>

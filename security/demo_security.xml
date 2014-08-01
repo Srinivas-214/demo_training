@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+    <record model="res.groups" id="base.group_company_emp_user">
+        <field name="name">Company/Employee</field>
+        <field name="category_id" ref="module_category_training"/>
+    </record>
+
+</data>
+</openerp>
+
