@@ -1,41 +1,44 @@
 # -*- coding: utf-8 -*-
 {
-    'name' : 'OpenERP Internal Training',
+    'name' : 'OdooERP Internal Training',
     'version': '1.0.0',
     'author' : 'Srinivas',
     'website' : 'http://www.sigmainfo.net/',
     'category': 'Learning & Development',
     'depends' : ['base', 'sale'],
     'description': """
-Module to explain OpenERP Customization and UI Artifacts .
+Module to explain OdooERP Customization and UI Artifacts .
 ==========================================================
 
-a) How to extend existing model 
-b) How to create new database model or OpenERP object
-c) Map OpenERP object to Form view, Tree view, Search view with Filters, Group By etc
-d) New Menu, Sub-menu, Action window
-e) Add custom button
-f) Add work-flow ==> Definition, Activity, Transition, View etc
-g) Add Search filter
-h) Add Security features ==> Add new security group, Menu access etc
-i) Add Demo data
-j) Add module icon
-k) Add custom CSS 
+1) How to extend existing model 
+2) How to create new database model or OdooERP object
+3) Map OdooERP object to Form view, Tree view, Search view with Filters, Group By etc
+4) New Menu, Sub-menu, Action window
+5) Add custom button
+6) Add work-flow ==> Definition, Activity, Transition, View etc
+7) Add Search filter
+8) Add Security features ==> Add new security group, Menu access etc
+9) Add Demo data
+10) Add module icon
+11) Add custom CSS 
 
 TODO:
-=====
-a) Kanban view
-b) Wizard
-c) Reports: RML, OpenOffice, Jasper, Aeroo etc
-d) Import/Export data through service
-e) Webservice
-f) Trigger or automated scripts
-g) Add group restriction to field, specific menu, configuration access etc
-
+----
+12) Kanban view
+13) Wizard
+14) Reports: RML, OpenOffice, Jasper, Aeroo etc
+15) Import/Export data through service
+16) Webservice
+17) Trigger or automated scripts
+18) Add group restriction to field, specific menu, configuration access etc
+19) Kanban view
+20) Graph view
+21) Calendar view
+22) Configuration option: example manage active field
+23) Enhance Search filter : Only active, inactive etc
+24) Accept or reject : trigger a mail to employee
     """,
     'data': [
-        'security/demo_security.xml',
-        'security/ir.model.access.csv',
         'view/sigma_view.xml',
         'view/company_view.xml',
         'workflow/employee_workflow.xml',
