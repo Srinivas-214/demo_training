@@ -31,7 +31,7 @@ TODO:
 16) Webservice
 17) Trigger or automated scripts
 18) Add group restriction to field, specific menu, configuration access etc
-19) Kanban view
+19) Support for images : employee image, department image
 20) Graph view
 21) Calendar view
 22) Configuration option: example manage active field
